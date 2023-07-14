@@ -76,13 +76,23 @@ class _SeatAvailabilityScreenState extends State<SeatAvailabilityScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () async{
-                      await controller!.scrollToIndex(int.parse(searchController.text.trim())~/8, preferPosition: AutoScrollPosition.middle);
-                      print(searchController.text);
+                      final int searchedSeat = int.tryParse(searchController.text.trim()) ?? 0;
+                      if (searchedSeat > 0 && searchedSeat <= 80) {
+                        await controller!.scrollToIndex(
+                          searchedSeat ~/ 8,
+                          preferPosition: AutoScrollPosition.middle,
+                        );
+                      } else {
+                        showsnackBar(context, 'Seat not found');
+                      }
                       FocusManager.instance.primaryFocus?.unfocus();
+                      // showsnackBar(context, 'Seat not found');
                       setState(() {
                         searchSeat = int.parse(searchController.text.trim());
 
                       });
+
+
                     },
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
