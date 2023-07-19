@@ -86,7 +86,6 @@ class _SeatAvailabilityScreenState extends State<SeatAvailabilityScreen> {
                         showsnackBar(context, 'Seat not found');
                       }
                       FocusManager.instance.primaryFocus?.unfocus();
-                      // showsnackBar(context, 'Seat not found');
                       setState(() {
                         searchSeat = int.parse(searchController.text.trim());
 
